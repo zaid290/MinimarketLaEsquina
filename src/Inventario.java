@@ -38,8 +38,16 @@ public class Inventario {
         int tipo = Integer.parseInt(sc.nextLine());
         System.out.print("Código: ");
         String codigo = sc.nextLine();
+        if (codigo.isEmpty()){
+            System.out.println("ERROR: El código es obligatorio.");
+            return;
+        }
         System.out.print("Nombre: ");
         String nombre = sc.nextLine();
+        if (nombre.isEmpty()){
+            System.out.println("ERROR: El nombre es obligatorio.");
+            return;
+        }
         System.out.print("Cantidad: ");
         String sCant = sc.nextLine();
         if (sCant.isEmpty()){
@@ -47,10 +55,22 @@ public class Inventario {
             return;
         }
         int cantidad = Integer.parseInt(sCant);
+        if (cantidad < 0){
+            System.out.println("ERROR: La cantidad no puede ser negativa.");
+            return;
+        }
         System.out.print("Precio: ");
         double precio = Double.parseDouble(sc.nextLine());
+        if (precio < 0){
+            System.out.println("ERROR: El precio no puede ser negativo.");
+            return;
+        }
         System.out.print("Categoría: ");
         String categoria = sc.nextLine();
+        if (categoria.isEmpty()){
+            System.out.println("ERROR: La categoría es obligatoria.");
+            return;
+        }
 
         if (buscarPorCodigo(codigo) != null){
             System.out.println("ERROR: Ya existe un producto con código " + codigo);
@@ -65,6 +85,10 @@ public class Inventario {
         } else {
             System.out.print("Material: ");
             String material = sc.nextLine();
+            if (material.isEmpty()){
+                System.out.println("ERROR: El material es obligatorio.");
+                return;
+            }
             productos.add(new ProductoNoPerecedero(
                     codigo, nombre, cantidad, precio, categoria, material));
         }
